@@ -1,0 +1,23 @@
+decks:
+  ScienceDeck:
+    modelName: "ClozeModel"
+    cards:
+#      - Text: "Water is composed of {{c1::hydrogen}} and {{c1::oxygen}}."
+#        Extra: "H₂O is the chemical formula."
+#        tags: ["chemistry"]
+       - Question: |
+           This is a multiline
+           question
+         Answer: |
+           This is a
+           multi line answer
+
+  GeographyDeck:
+    modelName: "ImageModel"
+    cards:
+      - Question: "What landmark is this?"
+        Answer: "Eiffel Tower, Paris."
+        Image: "eiffel_tower.jpg"
+        media:
+          - "eiffel_tower.jpg"
+        tags: ["geography"]
