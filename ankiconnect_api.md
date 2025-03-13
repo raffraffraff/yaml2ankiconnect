@@ -1,18 +1,16 @@
-# Supported Actions
-
-Documentation for currently supported actions is split up by category and is referenced below. Note that deprecated APIs will continue to function despite not being listed on this page as long as your request is labeled with a version number corresponding to when the API was available for use. Search parameters are passed to Anki, check the docs for more information: https://docs.ankiweb.net/searching.html
-
-Card Actions
-Deck Actions
-Graphical Actions
-Media Actions
-Miscellaneous Actions
-Model Actions
-Note Actions
-Statistic Actions
+# All Supported Actions
+The Ankiconnect addon supports the following types of actions:
+- Card Actions
+- Deck Actions
+- Graphical Actions
+- Media Actions
+- Miscellaneous Actions
+- Model Actions
+- Note Actions
+- Statistic Actions
 
 # Card Actions
-# getEaseFactors
+## getEaseFactors
 
 Returns an array with the ease factor for each of the given cards (in the same order).
 Sample request:
@@ -36,7 +34,7 @@ Sample result:
 }
 ```
 
-# setEaseFactors
+## setEaseFactors
 
 Sets ease factor of cards by card ID; returns true if successful (all cards existed) or false otherwise.
 Sample request:
@@ -61,7 +59,7 @@ Sample result:
 }
 ```
 
-# setSpecificValueOfCard
+## setSpecificValueOfCard
 
 Sets specific value of a single card. Given the risk of wreaking havor in the database when changing some of the values of a card, some of the keys require the argument "warning_check" set to True. This can be used to set a card's flag, change it's ease factor, change the review order in a filtered deck and change the column "data" (not currently used by anki apparantly), and many other values. A list of values and explanation of their respective utility can be found at AnkiDroid's wiki.
 Sample request:
@@ -87,7 +85,7 @@ Sample result:
 }
 ```
 
-# suspend
+## suspend
 
 Suspend cards by card ID; returns true if successful (at least one card wasn't already suspended) or false otherwise.
 Sample request:
@@ -111,7 +109,7 @@ Sample result:
 }
 ```
 
-# unsuspend
+## unsuspend
 
 Unsuspend cards by card ID; returns true if successful (at least one card was previously suspended) or false otherwise.
 Sample request:
@@ -135,7 +133,7 @@ Sample result:
 }
 ```
 
-# suspended
+## suspended
 
 Check if card is suspended by its ID. Returns true if suspended, false otherwise.
 Sample request:
@@ -159,7 +157,7 @@ Sample result:
 }
 ```
 
-# areSuspended
+## areSuspended
 
 Returns an array indicating whether each of the given cards is suspended (in the same order). If card doesn't exist returns null.
 Sample request:
@@ -183,7 +181,7 @@ Sample result:
 }
 ```
 
-# areDue
+## areDue
 
 Returns an array indicating whether each of the given cards is due (in the same order). Note: cards in the learning queue with a large interval (over 20 minutes) are treated as not due until the time of their interval has passed, to match the way Anki treats them when reviewing.
 Sample request:
@@ -207,7 +205,7 @@ Sample result:
 }
 ```
 
-# getIntervals
+## getIntervals
 
 Returns an array of the most recent intervals for each given card ID, or a 2-dimensional array of all the intervals for each given card ID when complete is true. Negative intervals are in seconds and positive intervals in days.
 Sample request 1:
@@ -256,7 +254,7 @@ Sample result 2:
 }
 ```
 
-# findCards
+## findCards
 
 Returns an array of card IDs for a given query. Functionally identical to guiBrowse but doesn't use the GUI for better performance.
 Sample request:
@@ -280,7 +278,7 @@ Sample result:
 }
 ```
 
-# cardsToNotes
+## cardsToNotes
 
 Returns an unordered array of note IDs for the given card IDs. For cards with the same note, the ID is only given once in the array.
 Sample request:
@@ -304,7 +302,7 @@ Sample result:
 }
 ```
 
-# cardsModTime
+## cardsModTime
 
 Returns a list of objects containings for each card ID the modification time. This function is about 15 times faster than executing cardsInfo.
 Sample request:
@@ -333,7 +331,7 @@ Sample result:
 }
 ```
 
-# cardsInfo
+## cardsInfo
 
 Returns a list of objects containing for each card ID the card fields, front and back sides including CSS, note type, the note that the card belongs to, and deck name, last modification timestamp as well as ease and interval.
 Sample request:
@@ -403,7 +401,7 @@ Sample result:
 }
 ```
 
-# forgetCards
+## forgetCards
 
 Forget cards, making the cards new again.
 Sample request:
@@ -427,7 +425,7 @@ Sample result:
 }
 ```
 
-# relearnCards
+## relearnCards
 
 Make cards be "relearning".
 Sample request:
@@ -451,7 +449,7 @@ Sample result:
 }
 ```
 
-# answerCards
+## answerCards
 
 Answer cards. Ease is between 1 (Again) and 4 (Easy). Will start the timer immediately before answering. Returns true if card exists, false otherwise.
 Sample request:
@@ -484,7 +482,7 @@ Sample result:
 }
 ```
 
-# setDueDate
+## setDueDate
 
 Set Due Date. Turns cards into review cards if they are new, and makes them due on a certain date.
     0 = today
@@ -513,7 +511,7 @@ Sample result:
 ```
 
 # Deck Actions
-# deckNames
+## deckNames
 
 Gets the complete list of deck names for the current user.
 Sample request:
@@ -534,7 +532,7 @@ Sample result:
 }
 ```
 
-# deckNamesAndIds
+## deckNamesAndIds
 
 Gets the complete list of deck names and their respective IDs for the current user.
 Sample request:
@@ -555,7 +553,7 @@ Sample result:
 }
 ```
 
-# getDecks
+## getDecks
 
 Accepts an array of card IDs and returns an object with each deck name as a key, and its value an array of the given cards which belong to it.
 Sample request:
@@ -582,7 +580,7 @@ Sample result:
 }
 ```
 
-# createDeck
+## createDeck
 
 Create a new empty deck. Will not overwrite a deck that exists with the same name.
 Sample request:
@@ -606,7 +604,7 @@ Sample result:
 }
 ```
 
-# changeDeck
+## changeDeck
 
 Moves cards with the given IDs to a different deck, creating the deck if it doesn't exist yet.
 Sample request:
@@ -631,7 +629,7 @@ Sample result:
 }
 ```
 
-# deleteDecks
+## deleteDecks
 
 Deletes decks with the given names. The argument cardsToo must be specified and set to true.
 Sample request:
@@ -656,7 +654,7 @@ Sample result:
 }
 ```
 
-# getDeckConfig
+## getDeckConfig
 
 Gets the configuration group object for the given deck.
 Sample request:
@@ -715,7 +713,7 @@ Sample result:
 }
 ```
 
-# saveDeckConfig
+## saveDeckConfig
 
 Saves the given configuration group, returning true on success or false if the ID of the configuration group is invalid (such as when it does not exist).
 Sample request:
@@ -774,7 +772,7 @@ Sample result:
 }
 ```
 
-# setDeckConfigId
+## setDeckConfigId
 
 Changes the configuration group for the given decks to the one with the given ID. Returns true on success or false if the given configuration group or any of the given decks do not exist.
 Sample request:
@@ -799,7 +797,7 @@ Sample result:
 }
 ```
 
-# cloneDeckConfigId
+## cloneDeckConfigId
 
 Creates a new configuration group with the given name, cloning from the group with the given ID, or from the default group if this is unspecified. Returns the ID of the new configuration group, or false if the specified group to clone from does not exist.
 Sample request:
@@ -824,7 +822,7 @@ Sample result:
 }
 ```
 
-# removeDeckConfigId
+## removeDeckConfigId
 
 Removes the configuration group with the given ID, returning true if successful, or false if attempting to remove either the default configuration group (ID = 1) or a configuration group that does not exist.
 Sample request:
@@ -848,7 +846,7 @@ Sample result:
 }
 ```
 
-# getDeckStats
+## getDeckStats
 
 Gets statistics such as total cards and cards due for the given decks.
 Sample request:
@@ -890,7 +888,7 @@ Sample result:
 ```
 
 # Graphical Actions
-# guiBrowse
+## guiBrowse
 
 Invokes the Card Browser dialog and searches for a given query. Returns an array of identifiers of the cards that were found. Query syntax is documented here.
 
@@ -920,7 +918,7 @@ Sample result:
 }
 ```
 
-# guiSelectCard
+## guiSelectCard
 
 Finds the open instance of the Card Browser dialog and selects a card given a card identifier. Returns true if the Card Browser is open, false otherwise.
 Sample request:
@@ -944,7 +942,7 @@ Sample result:
 }
 ```
 
-# guiSelectedNotes
+## guiSelectedNotes
 
 Finds the open instance of the Card Browser dialog and returns an array of identifiers of the notes that are selected. Returns an empty list if the browser is not open.
 Sample request:
@@ -965,7 +963,7 @@ Sample result:
 }
 ```
 
-# guiAddCards
+## guiAddCards
 
 Invokes the Add Cards dialog, presets the note using the given deck and model, with the provided field values and tags. Invoking it multiple times closes the old window and reopen the window with the new provided values.
 
@@ -1010,7 +1008,7 @@ Sample result:
 }
 ```
 
-# guiEditNote
+## guiEditNote
 
 Opens the Edit dialog with a note corresponding to given note ID. The dialog is similar to the Edit Current dialog, but:
     has a Preview button to preview the cards for the note
@@ -1038,7 +1036,7 @@ Sample result:
 }
 ```
 
-# guiCurrentCard
+## guiCurrentCard
 
 Returns information about the current card or null if not in review mode.
 Sample request:
@@ -1073,7 +1071,7 @@ Sample result:
 }
 ```
 
-# guiStartCardTimer
+## guiStartCardTimer
 
 Starts or resets the timerStarted value for the current card. This is useful for deferring the start time to when it is displayed via the API, allowing the recorded time taken to answer the card to be more accurate when calling guiAnswerCard.
 Sample request:
@@ -1094,7 +1092,7 @@ Sample result:
 }
 ```
 
-# guiShowQuestion
+## guiShowQuestion
 
 Shows question text for the current card; returns true if in review mode or false otherwise.
 Sample request:
@@ -1115,7 +1113,7 @@ Sample result:
 }
 ```
 
-# guiShowAnswer
+## guiShowAnswer
 
 Shows answer text for the current card; returns true if in review mode or false otherwise.
 Sample request:
@@ -1136,7 +1134,7 @@ Sample result:
 }
 ```
 
-# guiAnswerCard
+## guiAnswerCard
 
 Answers the current card; returns true if succeeded or false otherwise. Note that the answer for the current card must be displayed before before any answer can be accepted by Anki.
 Sample request:
@@ -1160,7 +1158,7 @@ Sample result:
 }
 ```
 
-# guiUndo
+## guiUndo
 
 Undo the last action / card; returns true if succeeded or false otherwise.
 Sample request:
@@ -1181,7 +1179,7 @@ Sample result:
 }
 ```
 
-# guiDeckOverview
+## guiDeckOverview
 
 Opens the Deck Overview dialog for the deck with the given name; returns true if succeeded or false otherwise.
 Sample request:
@@ -1205,7 +1203,7 @@ Sample result:
 }
 ```
 
-# guiDeckBrowser
+## guiDeckBrowser
 
 Opens the Deck Browser dialog.
 Sample request:
@@ -1226,7 +1224,7 @@ Sample result:
 }
 ```
 
-# guiDeckReview
+## guiDeckReview
 
 Starts review for the deck with the given name; returns true if succeeded or false otherwise.
 Sample request:
@@ -1250,7 +1248,7 @@ Sample result:
 }
 ```
 
-# guiImportFile
+## guiImportFile
 
 Invokes the Import... (Ctrl+Shift+I) dialog with an optional file path. Brings up the dialog for user to review the import. Supports all file types that Anki supports. Brings open file dialog if no path is provided. Forward slashes must be used in the path on Windows. Only supported for Anki 2.1.52+.
 Sample request:
@@ -1274,7 +1272,7 @@ Sample result:
 }
 ```
 
-# guiExitAnki
+## guiExitAnki
 
 Schedules a request to gracefully close Anki. This operation is asynchronous, so it will return immediately and won't wait until the Anki process actually terminates.
 Sample request:
@@ -1295,7 +1293,7 @@ Sample result:
 }
 ```
 
-# guiCheckDatabase
+## guiCheckDatabase
 
 Requests a database check, but returns immediately without waiting for the check to complete. Therefore, the action will always return true even if errors are detected during the database check.
 Sample request:
@@ -1317,7 +1315,7 @@ Sample result:
 ```
 
 # Media Actions
-# storeMediaFile
+## storeMediaFile
 
 Stores a file with the specified base64-encoded contents inside the media folder. Alternatively you can specify a absolute file path, or a url from where the file shell be downloaded. If more than one of data, path and url are provided, the data field will be used first, then path, and finally url. To prevent Anki from removing files not used by any cards (e.g. for configuration files), prefix the filename with an underscore. These files are still synchronized to AnkiWeb. Any existing file with the same name is deleted by default. Set deleteExisting to false to prevent that by letting Anki give the new file a non-conflicting name.
 Sample request (relative path):
@@ -1390,7 +1388,7 @@ Sample result (url):
 }
 ```
 
-# retrieveMediaFile
+## retrieveMediaFile
 
 Retrieves the base64-encoded contents of the specified file, returning false if the file does not exist.
 Sample request:
@@ -1414,7 +1412,7 @@ Sample result:
 }
 ```
 
-# getMediaFilesNames
+## getMediaFilesNames
 
 Gets the names of media files matched the pattern. Returning all names by default.
 Sample request:
@@ -1438,7 +1436,7 @@ Sample result:
 }
 ```
 
-# getMediaDirPath
+## getMediaDirPath
 
 Gets the full path to the collection.media folder of the currently opened profile.
 Sample request:
@@ -1459,7 +1457,7 @@ Sample result:
 }
 ```
 
-# deleteMediaFile
+## deleteMediaFile
 
 Deletes the specified file inside the media folder.
 Sample request:
@@ -1484,7 +1482,7 @@ Sample result:
 ```
 
 # Miscellaneous Actions
-# requestPermission
+## requestPermission
 
 Requests permission to use the API exposed by this plugin. This method does not require the API key, and is the only one that accepts requests from any origin; the other methods only accept requests from trusted origins, which are listed under webCorsOriginList in the add-on config. localhost is trusted by default.
 
@@ -1524,7 +1522,7 @@ Sample results:
 }
 ```
 
-# version
+## version
 
 Gets the version of the API exposed by this plugin. Currently versions 1 through 6 are defined.
 Sample request:
@@ -1545,7 +1543,7 @@ Sample result:
 }
 ```
 
-# apiReflect
+## apiReflect
 
 Gets information about the AnkiConnect APIs available. The request supports the following params:
     scopes - An array of scopes to get reflection information about. The only currently supported value is "actions".
@@ -1577,7 +1575,7 @@ Sample result:
 }
 ```
 
-# sync
+## sync
 
 Synchronizes the local Anki collections with AnkiWeb.
 Sample request:
@@ -1598,7 +1596,7 @@ Sample result:
 }
 ```
 
-# getProfiles
+## getProfiles
 
 Retrieve the list of profiles.
 Sample request:
@@ -1619,7 +1617,7 @@ Sample result:
 }
 ```
 
-# getActiveProfile
+## getActiveProfile
 
 Retrieve the active profile.
 Sample request:
@@ -1640,7 +1638,7 @@ Sample result:
 }
 ```
 
-# loadProfile
+## loadProfile
 
 Selects the profile specified in request.
 Sample request:
@@ -1664,7 +1662,7 @@ Sample result:
 }
 ```
 
-# multi
+## multi
 
 Performs multiple actions in one request, returning an array with the response of each action (in the given order).
 Sample request:
@@ -1710,7 +1708,7 @@ Sample result:
 }
 ```
 
-# exportPackage
+## exportPackage
 
 Exports a given deck in .apkg format. Returns true if successful or false otherwise. The optional property includeSched (default is false) can be specified to include the cards' scheduling data.
 Sample request:
@@ -1736,7 +1734,7 @@ Sample result:
 }
 ```
 
-# importPackage
+## importPackage
 
 Imports a file in .apkg format into the collection. Returns true if successful or false otherwise. Note that the file path is relative to Anki's collection.media folder, not to the client.
 Sample request:
@@ -1760,7 +1758,7 @@ Sample result:
 }
 ```
 
-# reloadCollection
+## reloadCollection
 
 Tells anki to reload all data from the database.
 Sample request:
@@ -1782,7 +1780,7 @@ Sample result:
 ```
 
 # Model Actions
-# modelNames
+## modelNames
 
 Gets the complete list of model names for the current user.
 Sample request:
@@ -1803,7 +1801,7 @@ Sample result:
 }
 ```
 
-# modelNamesAndIds
+## modelNamesAndIds
 
 Gets the complete list of model names and their corresponding IDs for the current user.
 Sample request:
@@ -1829,7 +1827,7 @@ Sample result:
 }
 ```
 
-# findModelsById
+## findModelsById
 
 Gets a list of models for the provided model IDs from the current user.
 Sample request:
@@ -2011,7 +2009,7 @@ Sample result:
 }
 ```
 
-# findModelsByName
+## findModelsByName
 
 Gets a list of models for the provided model names from the current user.
 Sample request:
@@ -2193,7 +2191,7 @@ Sample result:
 }
 ```
 
-# modelFieldNames
+## modelFieldNames
 
 Gets the complete list of field names for the provided model name.
 Sample request:
@@ -2217,7 +2215,7 @@ Sample result:
 }
 ```
 
-# modelFieldDescriptions
+## modelFieldDescriptions
 
 Gets the complete list of field descriptions (the text seen in the gui editor when a field is empty) for the provided model name.
 Sample request:
@@ -2241,7 +2239,7 @@ Sample result:
 }
 ```
 
-# modelFieldFonts
+## modelFieldFonts
 
 Gets the complete list of fonts along with their font sizes.
 Sample request:
@@ -2274,7 +2272,7 @@ Sample result:
 }
 ```
 
-# modelFieldsOnTemplates
+## modelFieldsOnTemplates
 
 Returns an object indicating the fields on the question and answer side of each card template for the given model name. The question side is given first in each array.
 Sample request:
@@ -2301,7 +2299,7 @@ Sample result:
 }
 ```
 
-# createModel
+## createModel
 
 Creates a new model to be used in Anki. User must provide the modelName, inOrderFields and cardTemplates to be used in the model. There are optional fields css and isCloze. If not specified, css will use the default Anki css and isCloze will be equal to false. If isCloze is true then model will be created as Cloze.
 
@@ -2398,7 +2396,7 @@ Sample result:
 }
 ```
 
-# modelTemplates
+## modelTemplates
 
 Returns an object indicating the template content for each card connected to the provided model by name.
 Sample request:
@@ -2431,7 +2429,7 @@ Sample result:
 }
 ```
 
-# modelStyling
+## modelStyling
 
 Gets the CSS styling for the provided model by name.
 Sample request:
@@ -2457,7 +2455,7 @@ Sample result:
 }
 ```
 
-# updateModelTemplates
+## updateModelTemplates
 
 Modify the templates of an existing model by name. Only specifies cards and specified sides will be modified. If an existing card or side is not included in the request, it will be left unchanged.
 Sample request:
@@ -2489,7 +2487,7 @@ Sample result:
 }
 ```
 
-# updateModelStyling
+## updateModelStyling
 
 Modify the CSS styling of an existing model by name.
 Sample request:
@@ -2516,7 +2514,7 @@ Sample result:
 }
 ```
 
-# findAndReplaceInModels
+## findAndReplaceInModels
 
 Find and replace string in existing model by model name. Customise to replace in front, back or css by setting to true/false.
 Sample request:
@@ -2547,7 +2545,7 @@ Sample result:
 }
 ```
 
-# modelTemplateRename
+## modelTemplateRename
 
 Renames a template in an existing model.
 Sample request:
@@ -2573,7 +2571,7 @@ Sample result:
 }
 ```
 
-# modelTemplateReposition
+## modelTemplateReposition
 
 Repositions a template in an existing model.
 
@@ -2601,7 +2599,7 @@ Sample result:
 }
 ```
 
-# modelTemplateAdd
+## modelTemplateAdd
 
 Adds a template to an existing model by name. If you want to update an existing template, use updateModelTemplates.
 Sample request:
@@ -2630,7 +2628,7 @@ Sample result:
 }
 ```
 
-# modelTemplateRemove
+## modelTemplateRemove
 
 Removes a template from an existing model.
 Sample request:
@@ -2655,7 +2653,7 @@ Sample result:
 }
 ```
 
-# modelFieldRename
+## modelFieldRename
 
 Rename the field name of a given model.
 Sample request:
@@ -2681,7 +2679,7 @@ Sample result:
 }
 ```
 
-# modelFieldReposition
+## modelFieldReposition
 
 Reposition the field within the field list of a given model.
 
@@ -2709,7 +2707,7 @@ Sample result:
 }
 ```
 
-# modelFieldAdd
+## modelFieldAdd
 
 Creates a new field within a given model.
 
@@ -2737,7 +2735,7 @@ Sample result:
 }
 ```
 
-# modelFieldRemove
+## modelFieldRemove
 
 Deletes a field within a given model.
 Sample request:
@@ -2762,7 +2760,7 @@ Sample result:
 }
 ```
 
-# modelFieldSetFont
+## modelFieldSetFont
 
 Sets the font for a field within a given model.
 Sample request:
@@ -2788,7 +2786,7 @@ Sample result:
 }
 ```
 
-# modelFieldSetFontSize
+## modelFieldSetFontSize
 
 Sets the font size for a field within a given model.
 Sample request:
@@ -2814,7 +2812,7 @@ Sample result:
 }
 ```
 
-# modelFieldSetDescription
+## modelFieldSetDescription
 
 Sets the description (the text seen in the gui editor when a field is empty) for a field within a given model.
 
@@ -2843,7 +2841,7 @@ Sample result:
 ```
 
 # Note Actions
-# addNote
+## addNote
 
 Creates a note using the given deck and model, with the provided field values and tags. Returns the identifier of the created note created on success, and null on failure.
 
@@ -2919,7 +2917,7 @@ Sample result:
 }
 ```
 
-# addNotes
+## addNotes
 
 Creates multiple notes using the given deck and model, with the provided field values and tags. Returns an array of identifiers of the created notes. In the event of any errors, all errors are gathered and returned.
 
@@ -2962,7 +2960,7 @@ Sample result:
 }
 ```
 
-# canAddNotes
+## canAddNotes
 
 Accepts an array of objects which define parameters for candidate notes (see addNote) and returns an array of booleans indicating whether or not the parameters at the corresponding index could be used to create a new note.
 Sample request:
@@ -2998,7 +2996,7 @@ Sample result:
 }
 ```
 
-# canAddNotesWithErrorDetail
+## canAddNotesWithErrorDetail
 
 Accepts an array of objects which define parameters for candidate notes (see addNote) and returns an array of objects with fields canAdd and error.
     canAdd indicates whether or not the parameters at the corresponding index could be used to create a new note.
@@ -3055,7 +3053,7 @@ Sample result:
 }
 ```
 
-# updateNoteFields
+## updateNoteFields
 
 Modify the fields of an existing note. You can also include audio, video, or picture files which will be added to the note with an optional audio, video, or picture property. Please see the documentation for addNote for an explanation of objects in the audio, video, or picture array.
 
@@ -3096,7 +3094,7 @@ Sample result:
 }
 ```
 
-# updateNote
+## updateNote
 
 Modify the fields and/or tags of an existing note. In other words, combines updateNoteFields and updateNoteTags. Please see their documentation for an explanation of all properties.
 
@@ -3134,7 +3132,7 @@ Sample result:
 }
 ```
 
-# updateNoteModel
+## updateNoteModel
 
 Update the model, fields, and tags of an existing note. This allows you to change the note's model, update its fields with new content, and set new tags.
 Sample request:
@@ -3167,7 +3165,7 @@ Sample result:
 }
 ```
 
-# updateNoteTags
+## updateNoteTags
 
 Set a note's tags by note ID. Old tags will be removed.
 Sample request:
@@ -3192,7 +3190,7 @@ Sample result:
 }
 ```
 
-# getNoteTags
+## getNoteTags
 
 Get a note's tags by note ID.
 Sample request:
@@ -3216,7 +3214,7 @@ Sample result:
 }
 ```
 
-# addTags
+## addTags
 
 Adds tags to notes by note ID.
 Sample request:
@@ -3241,7 +3239,7 @@ Sample result:
 }
 ```
 
-# removeTags
+## removeTags
 
 Remove tags from notes by note ID.
 Sample request:
@@ -3266,7 +3264,7 @@ Sample result:
 }
 ```
 
-# getTags
+## getTags
 
 Gets the complete list of tags for the current user.
 Sample request:
@@ -3287,7 +3285,7 @@ Sample result:
 }
 ```
 
-# clearUnusedTags
+## clearUnusedTags
 
 Clears all the unused tags in the notes for the current user.
 Sample request:
@@ -3308,7 +3306,7 @@ Sample result:
 }
 ```
 
-# replaceTags
+## replaceTags
 
 Replace tags in notes by note ID.
 Sample request:
@@ -3334,7 +3332,7 @@ Sample result:
 }
 ```
 
-# replaceTagsInAllNotes
+## replaceTagsInAllNotes
 
 Replace tags in all the notes for the current user.
 Sample request:
@@ -3359,7 +3357,7 @@ Sample result:
 }
 ```
 
-# findNotes
+## findNotes
 
 Returns an array of note IDs for a given query. Query syntax is documented here.
 Sample request:
@@ -3383,7 +3381,7 @@ Sample result:
 }
 ```
 
-# notesInfo
+## notesInfo
 
 Returns a list of objects containing for each note ID the note fields, tags, note type, modification time,the cards belonging to the note and the profile where the note was created.
 Sample request (note ids):
@@ -3434,7 +3432,7 @@ Sample result:
 
 s
 
-# notesModTime
+## notesModTime
 
 Returns a list of objects containings for each note ID the modification time.
 Sample request:
@@ -3463,7 +3461,7 @@ Sample result:
 }
 ```
 
-# deleteNotes
+## deleteNotes
 
 Deletes notes with the given ids. If a note has several cards associated with it, all associated cards will be deleted.
 Sample request:
@@ -3487,7 +3485,7 @@ Sample result:
 }
 ```
 
-# removeEmptyNotes
+## removeEmptyNotes
 
 Removes all the empty notes for the current user.
 Sample request:
@@ -3509,7 +3507,7 @@ Sample result:
 ```
 
 # Statistic Actions
-# getNumCardsReviewedToday
+## getNumCardsReviewedToday
 
 Gets the count of cards that have been reviewed in the current day (with day start time as configured by user in anki)
 Sample request:
@@ -3530,7 +3528,7 @@ Sample result:
 }
 ```
 
-# getNumCardsReviewedByDay
+## getNumCardsReviewedByDay
 
 Gets the number of cards reviewed as a list of pairs of (dateString, number)
 Sample request:
@@ -3554,7 +3552,7 @@ Sample result:
 }
 ```
 
-# getCollectionStatsHTML
+## getCollectionStatsHTML
 
 Gets the collection statistics report
 Sample request:
@@ -3578,7 +3576,7 @@ Sample result:
 }
 ```
 
-# cardReviews
+## cardReviews
 
 Requests all card reviews for a specified deck after a certain time. startID is the latest unix time not included in the result. Returns a list of 9-tuples (reviewTime, cardID, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
 Sample request:
@@ -3606,7 +3604,7 @@ Sample result:
 }
 ```
 
-# getReviewsOfCards
+## getReviewsOfCards
 
 Requests all card reviews for each card ID. Returns a dictionary mapping each card ID to a list of dictionaries of the format:
 
@@ -3670,7 +3668,7 @@ Sample result:
 }
 ```
 
-# getLatestReviewID
+## getLatestReviewID
 
 Returns the unix time of the latest review for the given deck. 0 if no review has ever been made for the deck.
 Sample request:
@@ -3694,7 +3692,7 @@ Sample result:
 }
 ```
 
-# insertReviews
+## insertReviews
 
 Inserts the given reviews into the database. Required format: list of 9-tuples (reviewTime, cardID, usn, buttonPressed, newInterval, previousInterval, newFactor, reviewDuration, reviewType)
 Sample request:
