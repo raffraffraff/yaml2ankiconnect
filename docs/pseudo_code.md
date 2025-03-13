@@ -81,9 +81,13 @@ We should start with `canAddNotesWithErrorDetail`, which accepts an array of not
 ]
 ```
 
-This tells you whether or not you can add the notes. For those that can be added, use addNote. For those that cannot, parse the error and decide how to proceed. Eg: if it's a duplicate, use updateNote. (Now, the API is a bit stupid because canAddNotesWithErrorDetail does not return the note ID, and you need that for any of the note update calls (updateNoteFields, updateNoteTags, updateNote, updateNoteModel):
+This tells you whether or not you can add the notes. For those that can be added, use addNote. For those that cannot, parse the error and decide how to proceed. Eg: if it's OK, add the note but if it's a duplicate, update the note using one of the update calls. There are several calls that can do specific things, and these are stupidly named, because of what they actually do:
+- `updateNoteFields` only updates fields
+- `updateNoteTags` only updates tags
+- `updateNoteModel` updates the entire thing, including fields, tags and model
+- `updateNote` updates the note fields and tags but not the model
 
-When updating a note, since we have the complete note config in YAML it is better to use updateNoteModel which takes the modelName, fields and tags (ie: the whole shebang)
+That's not very intuitive. We will _only_ use updateNoteModel and fling everything we have at it. _Hopefully_ it won't fail if the tags are empty:
 ```
 "note": {
     "id": 1514547547030,
@@ -96,5 +100,5 @@ When updating a note, since we have the complete note config in YAML it is bette
 }
 ```
 
-It's actually really stupid: to update a note, you need the note ID. But you don't get it in any of the useful outputs. For exampel, if you use `canAddNotesWithErrorDetail` it doesn't tell you the note ID. You're just told that these attributes clash with an existing note. You then have to get all notes (including ID) and find out which one has the same attributes in order to find the fucking ID. _Then_ you can use the ID to update the note attributes. 
+This is where it gets extremely stupid: to update a note, you need the note ID. But you don't get the note ID from `canAddNotesWithErrorDetail`, so for a particular set of parameters in a given note you'll be told "Nuh uh, that's a duplicate", but won't tell you the ID of the note that it duplicates. So you need to ask for ALL of the notes and check which ID matches _all_ the parameters you're trying to create a note for. Fucking _daft_. 
 
