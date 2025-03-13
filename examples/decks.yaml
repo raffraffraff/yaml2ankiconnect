@@ -1,15 +1,39 @@
 decks:
   ScienceDeck:
-    modelName: "ClozeModel"
+    modelName: "Cloze"
     cards:
       - Text: "Water is composed of {{c1::hydrogen}} and {{c1::oxygen}}."
         Extra: "H₂O is the chemical formula."
         tags: ["chemistry"]
 
+- cards: [ id, id, id ]
+  fields:
+    Back Extra:
+      order: 1
+      value: |-
+        Some extra crap
+        <pre><code>
+        git add bullshido
+        whatever
+        etc
+        </code></pre>
+    Text:
+      order: 0
+      value: |-
+        This command {{c1::deletes}} filename.txt:
+        <pre><code>{{c2::rm -f}} filename.txt</code></pre>
+  modelName: Cloze
+  noteId: id
+  profile: User 1
+  tags:
+  - tag1
+  - tag2
+
 #       - Question: How do you do?
 #         Answer: Because
 
-
+  TestDeck:
+    modelName: "Basic
   GeographyDeck:
     modelName: "ImageModel"
     cards:
@@ -19,3 +43,56 @@ decks:
         media:
           - "eiffel_tower.jpg"
         tags: ["geography"]
+
+
+
+{
+    "action": "addNote",
+    "version": 6,
+    "params": {
+        "note": {
+            "deckName": "Default",
+            "modelName": "Basic",
+            "fields": {
+                "Front": "front content",
+                "Back": "back content"
+            },
+            "options": {
+                "allowDuplicate": false,
+                "duplicateScope": "deck",
+                "duplicateScopeOptions": {
+                    "deckName": "Default",
+                    "checkChildren": false,
+                    "checkAllModels": false
+                }
+            },
+            "tags": [
+                "yomichan"
+            ],
+            "audio": [{
+                "url": "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=猫&kana=ねこ",
+                "filename": "yomichan_ねこ_猫.mp3",
+                "skipHash": "7e2c2f954ef6051373ba916f000168dc",
+                "fields": [
+                    "Front"
+                ]
+            }],
+            "video": [{
+                "url": "https://cdn.videvo.net/videvo_files/video/free/2015-06/small_watermarked/Contador_Glam_preview.mp4",
+                "filename": "countdown.mp4",
+                "skipHash": "4117e8aab0d37534d9c8eac362388bbe",
+                "fields": [
+                    "Back"
+                ]
+            }],
+            "picture": [{
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg",
+                "filename": "black_cat.jpg",
+                "skipHash": "8d6e4646dfae812bf39651b59d7429ce",
+                "fields": [
+                    "Back"
+                ]
+            }]
+        }
+    }
+}
