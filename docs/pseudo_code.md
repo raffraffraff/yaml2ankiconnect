@@ -102,3 +102,7 @@ That's not very intuitive. We will _only_ use updateNoteModel and fling everythi
 
 This is where it gets extremely stupid: to update a note, you need the note ID. But you don't get the note ID from `canAddNotesWithErrorDetail`, so for a particular set of parameters in a given note you'll be told "Nuh uh, that's a duplicate", but won't tell you the ID of the note that it duplicates. So you need to ask for ALL of the notes and check which ID matches _all_ the parameters you're trying to create a note for. Fucking _daft_. 
 
+It's kinda moot anyway because if you fundamentally change a note, your new YAML no longer matches up with whatever you previously wrote. Right? So we have two choices:
+1. Delete any note that isn't currently represented in YAML and add _all_ notes in YAML
+2. Update the YAML with the note IDs after pushing (is that a thing? Can we? Should we then just ignore the ID with requests that can't accept it?)
+3. ??? I don't know ???
